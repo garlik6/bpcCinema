@@ -22,12 +22,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(authorise -> authorise.antMatchers("/public/images/**", "/images/**", "/static/**", "/login", "/home", "/register").permitAll()
+                .authorizeRequests(authorise -> authorise.antMatchers("/public/images/**", "/images/**", "/static/**", "/login", "/home", "/register","/logout").permitAll()
                         .anyRequest().authenticated());
         http.oauth2Login().loginPage("/login")
                 .clientRegistrationRepository(clientRegistrationRepository);
+        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
+                .clearAuthentication(true).logoutSuccessUrl("/login?logout");
         http.formLogin(c -> c.loginPage("/login"));
-        http.logout().invalidateHttpSession(true)
+        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .clearAuthentication(true).logoutSuccessUrl("/login?logout");
         return http.build();
     }
