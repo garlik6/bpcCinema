@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>Fixed top navbar example · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/navbar-fixed/">
+
+
+    <link href="../public/static/dist/css/bootstrap.min.css" th:href="@{static/dist/css/bootstrap.min.css}"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../public/static/dist/css/navbar-top-fixed.css"
+          th:href="@{static/dist/css/navbar-top-fixed.css}" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <img width=3% src="../public/images/bookmark-check-fill.svg"
+             th:src="@{/images/bookmark-check-fill.svg}" th:href="@{/home}"
+             alt="yyy">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" th:href="@{/home}">Home</a>
+                </li>
+                <li  class="nav-item">
+                    <a th:if="${!#authentication.isAuthenticated()}" class="nav-link" th:href="@{/login}">Log In</a>
+                </li>
+                <li  class="nav-item">
+                    <a th:if="${!#authentication.isAuthenticated()}"  th:href="@{/register}">Register</a>
+                </li>
+                <li  class="nav-item">
+                    <p th:if="${#authentication.isAuthenticated()}" class="nav-link" th:text="${username}"></p>
+                </li>
+                <li  class="nav-item">
+                    <form class="nav-link" th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </li>
+
+
+            </ul>
+<!--            <form class="d-flex" role="search">-->
+<!--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+        </div>
+    </div>
+</nav>
+
+<main class="container" layout:fragment="main-content">
+
+</main>
+
+
+<script th:src="@{/static/dist/js/bootstrap.bundle.min.js}"></script>
+
+
+</body>
+</html>
