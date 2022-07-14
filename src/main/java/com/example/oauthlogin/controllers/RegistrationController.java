@@ -23,30 +23,30 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String register(final Model model) {
-        model.addAttribute("userData", new UserDto());
+        model.addAttribute("userDto", new UserDto());
         return "register";
     }
 
     @PostMapping("/register")
-    public String userRegistration(final @Valid UserDto userData, final BindingResult bindingResult, final Model model) {
-        if (!Objects.equals(userData.getPasswordSecondTime(), userData.getPassword())) {
+    public String userRegistration(final @Valid UserDto userDto, final BindingResult bindingResult, final Model model) {
+        if (!Objects.equals(userDto.getPasswordSecondTime(), userDto.getPassword())) {
             bindingResult.addError(new ObjectError("globalError", "Passwords dont match."));
         }
 
-        if (!userData.isAgreeWithTerms()) {
+        if (!userDto.isAgreeWithTerms()) {
             bindingResult.addError(new ObjectError("error", "Must agree with terms"));
         }
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("registrationForm", userData);
+            model.addAttribute("registrationForm", userDto);
             return "register";
         }
 
         try {
-            userService.register(userData);
+            userService.register(userDto);
         } catch (UserAlreadyExistException e) {
-            bindingResult.rejectValue("username", "userData.username", "An account already exists for this username.");
-            model.addAttribute("registrationForm", userData);
+            bindingResult.rejectValue("username", "userDto.username", "An account already exists for this username.");
+            model.addAttribute("registrationForm", userDto);
             return "register";
         }
         return "home";

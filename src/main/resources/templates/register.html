@@ -16,7 +16,7 @@
         <p class="divider-text">
             <span class="bg-light">OR</span>
         </p>
-        <form action="#" th:action="@{/register}" th:object="${userData}" method="post">
+        <form action="#" th:action="@{/register}" th:object="${userDto}" method="post">
             <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                 <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
             </div>

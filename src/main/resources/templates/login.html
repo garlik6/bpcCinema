@@ -18,9 +18,6 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
-            <p class="text-center">
-                <a href="/oauth2/authorization/github" class="btn btn-outline-primary">  Login via GitHub</a>
-            </p>
         <form th:action="@{/login}" method="post">
             <div class="input-group mb-3">
 
@@ -44,6 +41,7 @@
                 <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
             <div><input class="btn btn-outline-primary" type="submit" value="Sign In"/></div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
     </div>
 </div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Login</title>
+</head>
+<body class="text-center">
+<div layout:fragment="main-content">
+
+    <div class="card bg-light login-card">
+        <div class="card-body align-text-center">
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <p class="d-flex align-content-center">
+                <a href="/oauth2/authorization/github" class="btn btn-outline-primary"> Login via GitHub</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

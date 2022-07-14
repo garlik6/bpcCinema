@@ -19,9 +19,9 @@ public class MainController {
     @Value("${profilePicture.format}")
     private String ProfilePictureFormat;
 
-    @GetMapping
-    public String hello(Authentication authentication, Model model) throws IOException {
-        if (authentication.getClass() == OAuth2AuthenticationToken.class) {
+    @GetMapping("/main")
+    public String hello(Authentication authentication, Model model) {
+        if (authentication != null && authentication.getClass() == OAuth2AuthenticationToken.class) {
             String username = ((OAuth2AuthenticationToken) authentication).getPrincipal().getAttribute("login");
             String profilePicURL = ((OAuth2AuthenticationToken) authentication).getPrincipal().getAttribute("avatar_url");
             String HtmlPathToPic = "/images/" + username + "_pic." + ProfilePictureFormat;

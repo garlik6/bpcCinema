@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 @Component
 public class MyUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+    @Autowired
     private UserRepository userRepository;
 
     public MyUserDetailsService() {
