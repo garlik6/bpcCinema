@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>OAuthLogin</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>OAuthLogin</name>
     <description>OAuthLogin</description>
     <properties>
@@ -84,7 +84,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/garlik6/bpcCinema</developerConnection>
-        <tag>bpcCinema-0.01</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
