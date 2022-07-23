@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+
+
+
+    <h1>Your search query:</h1>
+    <p th:text="${query}" ></p>
+
+    <h1>Result</h1>
+    <img th:src="${movie?.getPoster()}">
+    <p th:text="${movie?.toString()}"></p>
+    <p th:text="${notFound}"></p>
+
+</div>
+</body>
+</html>

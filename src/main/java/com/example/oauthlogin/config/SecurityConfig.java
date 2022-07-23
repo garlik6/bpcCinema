@@ -38,16 +38,9 @@ public class SecurityConfig {
                                 "/logout"))
                 .authorizeRequests(authorise -> authorise
                         .antMatchers("/login",
-                                "/public/images/**",
-                                "/images/**",
-                                "/static/**",
-                                "/home",
-                                "/register",
                                 "/logout")
                         .permitAll()
-                        .antMatchers("/main",
-                                "/")
-                        .authenticated())
+                        .antMatchers("/main", "/", "/collection").authenticated())
                 .formLogin(c -> c.loginPage("/login")
                 )
                 .authenticationManager(passwordAuthenticationManager()).userDetailsService(userDetailsService());
@@ -67,9 +60,13 @@ public class SecurityConfig {
                                 "/home",
                                 "/register",
                                 "/logout",
+                                "/movie/**",
+                                "/catalog",
                                 "/oauth2/authorization/github/**",
-                                "/login/oauth2/code/github/**").permitAll()
-                        .antMatchers("/main", "/").authenticated());
+                                "/login/oauth2/code/github/**").permitAll().anyRequest()
+//                        .antMatchers("/main", "/", "/collection")
+
+                        .authenticated());
         http.oauth2Login().loginPage("/login-oauth").clientRegistrationRepository(clientRegistrationRepository);
         http.logout().logoutSuccessUrl("/login-oauth?logout");
         return http.build();

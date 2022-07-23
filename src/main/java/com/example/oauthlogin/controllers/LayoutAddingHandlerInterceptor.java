@@ -30,7 +30,6 @@ public class LayoutAddingHandlerInterceptor implements HandlerInterceptor {
         if (a.getClass() == OAuth2AuthenticationToken.class) {
             username = ((OAuth2AuthenticationToken) a).getPrincipal().getAttribute("login");
 
-//            System.out.println(":)");
         } else {
             username = a.getName();
         }
