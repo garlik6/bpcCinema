@@ -60,12 +60,10 @@ public class SecurityConfig {
                                 "/home",
                                 "/register",
                                 "/logout",
-                                "/movie/**",
+                                "/movie",
                                 "/catalog",
                                 "/oauth2/authorization/github/**",
                                 "/login/oauth2/code/github/**").permitAll().anyRequest()
-//                        .antMatchers("/main", "/", "/collection")
-
                         .authenticated());
         http.oauth2Login().loginPage("/login-oauth").clientRegistrationRepository(clientRegistrationRepository);
         http.logout().logoutSuccessUrl("/login-oauth?logout");
