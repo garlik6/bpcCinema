@@ -6,6 +6,7 @@ import com.example.oauthlogin.repositories.MovieRepository;
 import com.example.oauthlogin.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,8 @@ public class MovieController {
     }
 
     @GetMapping("/movie")
-    public String showMovie(Model model, @RequestParam String id, Authentication authentication) {
+    public String showMovie(Model model, @RequestParam String id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Movie> movie = movieRepository.findById(id);
         movie.ifPresent(value -> model.addAttribute("movie", value));
         String username = getUsername(authentication);
@@ -39,7 +41,6 @@ public class MovieController {
             Boolean liked = user.get().isMovieLiked(movie.get());
             model.addAttribute("liked", liked);
         }
-
         return "movie";
     }
 
@@ -58,7 +59,8 @@ public class MovieController {
 
 
     @PostMapping("/movie")
-    public String like(@RequestParam String id, @RequestParam String option, Authentication authentication, Model model) {
+    public String like(@RequestParam String id, @RequestParam String option, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<Movie> movie = movieRepository.findById(id);
         String username = getUsername(authentication);
 

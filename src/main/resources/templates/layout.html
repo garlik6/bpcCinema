@@ -89,24 +89,6 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" th:href="@{/home}">Home</a>
                 </li>
-<!--                <li class="nav-item">-->
-<!--                    <a th:if="${!#authentication.isAuthenticated()}" class="nav-link" th:href="@{/login}">Log In</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a th:if="${!#authentication.isAuthenticated()}" class="nav-link" th:href="@{/login-oauth}">Log in-->
-<!--                        with Github</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a th:if="${!#authentication.isAuthenticated()}" class="nav-link"-->
-<!--                       th:href="@{/register}">Register</a>-->
-<!--                </li>-->
-
-<!--                <li class="nav-item">-->
-<!--                    <form class="nav-link" th:if="${#authentication.isAuthenticated()}" th:action="@{/logout}"-->
-<!--                          method="post">-->
-<!--                        <input type="submit" value="Sign Out"/>-->
-<!--                    </form>-->
-<!--                </li>-->
                 <li class="nav-item">
                     <a  class="nav-link btn-outline-primary" th:href="@{/catalog}">Movie collection</a>
                 </li>
@@ -118,7 +100,6 @@
                     </svg>
                 </a>
                 </li>
-
 
             </ul>
 
@@ -161,7 +142,7 @@
                             </form>
                         </li>
                     </ul>
-                </div></li>
+                </div>
 
 
 
