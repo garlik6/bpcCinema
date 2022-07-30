@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+
+        <div class="row">
+            <div th:each="user :${users}" class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <p th:text="${user.getUsername()}" class="card-text"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <form th:action="@{/api/dashboard/users(id = ${user.getId()})}" th:method="delete">
+                                <input type="submit" class="btn-outline-danger">
+                            </form>
+                            <small th:text="${user.getUserType()}" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

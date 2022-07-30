@@ -1,12 +1,16 @@
 package com.example.oauthlogin.model;
 
+import com.example.oauthlogin.repositories.RoleRepository;
 import com.example.oauthlogin.service.PictureSaverService;
+import com.example.oauthlogin.service.SetupDataLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class OAuth2UserGithub implements OAuth2User {
@@ -24,6 +28,7 @@ public class OAuth2UserGithub implements OAuth2User {
         return attributes;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -34,6 +39,7 @@ public class OAuth2UserGithub implements OAuth2User {
         return name;
     }
 
+
     public OAuth2UserGithub(User user, String name, Map<String, Object> attributes, Collection<? extends GrantedAuthority> authorities) {
         this.user = user;
         this.name = name;
@@ -41,14 +47,16 @@ public class OAuth2UserGithub implements OAuth2User {
         this.authorities = authorities;
     }
 
-    public void populateUser() throws IOException {
-        user.setUserType(UserType.GITHUB);
-        user.setId(Integer.parseInt(name));
-        String login = (String) attributes.get("login");
-        String avatar_url = (String) attributes.get("avatar_url");
-        user.setUsername(login);
-        String profilePicUrl = PictureSaverService.savePicture(avatar_url,login);
-        user.setProfilePicUrl(profilePicUrl);
+
+
+    public String getLoginAttribute()
+    {
+        return (String) attributes.get("login");
+    }
+
+    public String getAvatarUriAttribute()
+    {
+        return (String) attributes.get("avatar_url");
     }
 
     @Override
@@ -60,4 +68,5 @@ public class OAuth2UserGithub implements OAuth2User {
                 ", authorities=" + authorities +
                 '}';
     }
+
 }

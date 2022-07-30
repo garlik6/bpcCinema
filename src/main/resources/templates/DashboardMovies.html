@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+
+        <div class="row">
+            <div th:each="movie :${movies}" class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" th:src="${movie.getPoster()}" alt="Thumbnail [100%x225]" style="height: 650px;  display: block;">
+                    <div class="card-body">
+                        <p th:text="${movie.getPlot()}" class="card-text"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a th:href="@{/movie(id = ${movie.getImdbID()})}"><button  type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                <form th:action="@{/api/dashboard/movies(id = ${movie.getImdbID()})}" th:method="delete">
+                                    <input type="submit" class="btn-outline-danger">
+                                </form>
+                            </div>
+                            <small th:text="${movie.getRuntime()}" class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

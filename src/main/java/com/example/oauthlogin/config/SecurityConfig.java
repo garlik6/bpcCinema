@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -35,12 +36,14 @@ public class SecurityConfig {
                 .requestMatchers(config ->
                         config.antMatchers(
                                 "/login",
-                                "/logout"))
+                                "/logout",
+                                "/api/**"))
                 .authorizeRequests(authorise -> authorise
                         .antMatchers("/login",
                                 "/logout")
                         .permitAll()
-                        .antMatchers("/main", "/", "/collection").authenticated())
+                        .antMatchers("/main", "/", "/collection").authenticated()
+                        .antMatchers("/api/**").hasRole("ADMIN"))
                 .formLogin(c -> c.loginPage("/login")
                 )
                 .authenticationManager(passwordAuthenticationManager()).userDetailsService(userDetailsService());
@@ -63,8 +66,10 @@ public class SecurityConfig {
                                 "/movie",
                                 "/catalog",
                                 "/oauth2/authorization/github/**",
-                                "/login/oauth2/code/github/**").permitAll().anyRequest()
-                        .authenticated());
+                                "/login/oauth2/code/github/**",
+                                "/searchResult").permitAll()
+                        .antMatchers("/main", "/", "/collection").authenticated()
+                );
         http.oauth2Login().loginPage("/login-oauth").clientRegistrationRepository(clientRegistrationRepository);
         http.logout().logoutSuccessUrl("/login-oauth?logout");
         return http.build();
@@ -91,13 +96,6 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public StrictHttpFirewall httpFirewall() {
-        StrictHttpFirewall firewall = new StrictHttpFirewall();
-        firewall.setAllowedHttpMethods(Arrays.asList("GET", "POST"));
-        return firewall;
     }
 
 

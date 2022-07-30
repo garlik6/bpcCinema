@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.*;
 import java.util.Collection;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,7 +30,21 @@ public class Movie {
     private String poster;
 
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
+    @JoinTable(
+            name = "users_movies",
+            inverseJoinColumns = @JoinColumn(
+                    name = "user_Id", referencedColumnName = "id"),
+            joinColumns  = @JoinColumn(
+                    name = "movie_id", referencedColumnName = "imdbID")
+
+    )
     private Collection<User> users;
 
     @Override
