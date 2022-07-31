@@ -1,7 +1,8 @@
 # BPC Cinema
 
  It is a simple website for searching for movies and adding them to your watchlist(collection).
- Main goal of this project is to sharpen my knowledge of main Spring Framework modules.
+ 
+ Main goal of this project is to enhance my knowledge of main Spring Framework modules.
 
 ## Technologies
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
