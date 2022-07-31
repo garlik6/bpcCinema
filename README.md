@@ -21,7 +21,7 @@
 ## Important features
 - [x] **Two authentication methods:**
 - Basic username password 
-- ![OAuth2](https://datatracker.ietf.org/doc/html/rfc6749) simple sign-on with GitHub as a provider (user data is being saved to database)
+- [OAuth2](https://datatracker.ietf.org/doc/html/rfc6749) simple sign-on with GitHub as a provider (user data is being saved to database)
 - They work in parallel so user can get authenticated for reaching every secured endpoint (except admin dashboard) with one or another method.
 This was achieved by configuring two different security filter chains and placing them in right order.
 - [x] **Movie data loading using WebFlux webСlient**
