@@ -30,4 +30,4 @@ This was achieved by configuring two different security filter chains and placin
 - API used: filmApi.baseUrl=http://www.omdbapi.com/
 - [x] **Users can add movies they liked to their collection (Many to many relationship)**
 - [x] **Admin dashboard with ability to delete users and movies from database**
-- cascade was configured in a way that when user is deleted movies related to him stay in a database
+- cascade was configured in a way that when user is deleted movies related to them stay in a database
